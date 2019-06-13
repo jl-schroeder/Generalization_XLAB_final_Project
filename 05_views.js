@@ -115,9 +115,9 @@ const forced_choice_2A = babeViews.view_generator("forced_choice", {
     // }
 });
 
-const  = babeViews.view_generator("gridWorld", {
+const begin = babeViews.view_generator("gridWorld", {
 trials: trial_info.gridWorld.length,
-name: '',
+name: 'begin',
 data: trial_info.gridWorld, 
 });
 
