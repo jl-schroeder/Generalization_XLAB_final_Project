@@ -30,7 +30,7 @@ var grid = clickableGrid(11,11,function(el,row,col,i){
 
 document.body.appendChild(grid);
      
-function clickableGrid( rows, cols, callback ){
+const GRID = function clickableGrid( rows, cols, callback ){
     var i=0;
     var grid = document.createElement('table');
     grid.className = 'grid';
