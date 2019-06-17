@@ -19,5 +19,4 @@ const trial_info = {
             correct: "shiny"
         }
     ],
-	gridWorld : GRID,
 };

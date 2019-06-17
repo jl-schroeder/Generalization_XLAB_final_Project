@@ -17,8 +17,7 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions,
-            begin,
-            post_test,
+            main_exp,
             thanks,
         ],
         // Here, you can specify all information for the deployment
@@ -33,14 +32,15 @@ $("document").ready(function() {
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
         // Here, you can specify how the progress bar should look like
+		
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                begin.name,
+                main_exp.name,
             ],
              // Possible styles are "default", "separate" and "chunks"
             style: "separate",
             width: 100
-        }
+        } 
     });
 });

@@ -115,11 +115,52 @@ const forced_choice_2A = babeViews.view_generator("forced_choice", {
     // }
 });
 
-const begin = babeViews.view_generator("gridWorld", {
+/*
+const instructions = babeViews.view_generator("gridWorld", {
 trials: trial_info.gridWorld.length,
-name: 'begin',
+name: 'instructions',
 data: trial_info.gridWorld, 
+}); */
+
+const main_exp =  {
+	trials : 1,
+	render : function(CT) {
+	var lastClicked;
+	var grid = clickableGrid(10,10,function(el,row,col,i){
+    console.log("You clicked on element:",el);
+    console.log("You clicked on row:",row);
+    console.log("You clicked on col:",col);
+    console.log("You clicked on item #:",i);
+
+    el.className='clicked';
+    if (lastClicked) lastClicked.className='';
+    lastClicked = el;
 });
+
+document.body.appendChild(grid);
+     
+function clickableGrid( rows, cols, callback ){
+    var i=0;
+    var grid = document.createElement('table');
+    grid.className = 'grid';
+    for (var r=0;r<rows;++r){
+        var tr = grid.appendChild(document.createElement('tr'));
+        for (var c=0;c<cols;++c){
+            var cell = tr.appendChild(document.createElement('td'));
+            cell.innerHTML = ++i;
+            cell.addEventListener('click',(function(el,r,c,i){
+                return function(){
+                    callback(el,r,c,i);
+                }
+            })(cell,r,c,i),false);
+        }
+    }
+    return grid;
+	}
+
+	}
+
+}
 
 // There are many more templates available:
 // forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
