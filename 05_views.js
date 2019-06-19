@@ -126,7 +126,7 @@ const main_exp =  {
 	trials : 1,
 	render : function(CT) {
 	var lastClicked;
-	var grid = clickableGrid(10,10,function(el,row,col,i){
+	var grid = clickableGrid(11,11,function(el,row,col,i){
     console.log("You clicked on element:",el);
     console.log("You clicked on row:",row);
     console.log("You clicked on col:",col);
@@ -140,6 +140,8 @@ const main_exp =  {
 document.body.appendChild(grid);
      
 function clickableGrid( rows, cols, callback ){
+	var GRID_NUMBERS = createGRID(11,11);
+	GRID_NUMBERS = shuffle(GRID_NUMBERS);
     var i=0;
     var grid = document.createElement('table');
     grid.className = 'grid';
@@ -147,7 +149,8 @@ function clickableGrid( rows, cols, callback ){
         var tr = grid.appendChild(document.createElement('tr'));
         for (var c=0;c<cols;++c){
             var cell = tr.appendChild(document.createElement('td'));
-            cell.innerHTML = ++i;
+            cell.innerHTML = GRID_NUMBERS[i];
+			i= i+1;
             cell.addEventListener('click',(function(el,r,c,i){
                 return function(){
                     callback(el,r,c,i);
