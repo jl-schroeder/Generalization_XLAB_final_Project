@@ -141,7 +141,7 @@ document.body.appendChild(grid);
      
 function clickableGrid( rows, cols, callback ){
 	var GRID_NUMBERS = createGRID(11,11);
-	GRID_NUMBERS = shuffle(GRID_NUMBERS);
+	//GRID_NUMBERS = shuffle(GRID_NUMBERS);
     var i=0;
     var grid = document.createElement('table');
     grid.className = 'grid';

@@ -29,7 +29,7 @@ for (i = 0; i <= arr_dim; i++) {
 */
 
 // This is a function that creates a 2-dim array with random numbers, does not work right now :/ 
-
+/*
 function createGRID(width, height){
 	var GRID_array = [];
 	for(var i = 0;i < width*height;i++){
@@ -44,15 +44,15 @@ function shuffle(a) {
         [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
-}
+}*/
 
-function createGRID_new(width, height){
+function createGRID(width, height){
 	var GRID_array = [];
 	for(var i = 0;i< width*height;i++){
   	GRID_array[i] = Math.floor(Math.random() * 100) +1;
   }
   return GRID_array;
-
+}
 
 
 /*
