@@ -122,76 +122,26 @@ name: 'instructions',
 data: trial_info.gridWorld, 
 }); */
 
-
-
 const main_exp =  {
 	trials : 1,
-	name: 'main_exp',
 	render : function(CT) {
 	var lastClicked;
-	var GRID_VALUES = 0;
-	var final_value = 0
-	var grid = clickableGrid(11,11,function(el,row,col,i,val){
-	el.innerHTML = val;
+	var grid = clickableGrid(11,11,function(el,row,col,i){
     console.log("You clicked on element:",el);
-	console.log("You clicked on the value:",val);
     console.log("You clicked on row:",row);
     console.log("You clicked on col:",col);
-	final_value = final_value + val;
-	console.log("Your current value is: ",final_value);
-	
-	if(val < 12){
-		el.className='clicked_1';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 11 && val < 23){
-		el.className='clicked_2';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 22 && val < 34){
-		el.className='clicked_3';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 33 && val < 45) {
-		el.className='clicked_4';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 44 && val < 56){
-		el.className='clicked_5';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 55 && val < 67){
-		el.className='clicked_6';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 66 && val < 78){
-		el.className='clicked_7';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 77 && val < 90){
-		el.className='clicked_8';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	else if(val > 89){
-		el.className='clicked_9';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;	
-	}
-	
+    console.log("You clicked on item #:",i);
+
+    el.className='clicked';
+    if (lastClicked) lastClicked.className='';
+    lastClicked = el;
 });
 
 document.body.appendChild(grid);
      
 function clickableGrid( rows, cols, callback ){
 	var GRID_NUMBERS = createGRID(11,11);
+	//GRID_NUMBERS = shuffle(GRID_NUMBERS);
     var i=0;
     var grid = document.createElement('table');
     grid.className = 'grid';
@@ -199,14 +149,13 @@ function clickableGrid( rows, cols, callback ){
         var tr = grid.appendChild(document.createElement('tr'));
         for (var c=0;c<cols;++c){
             var cell = tr.appendChild(document.createElement('td'));
-            GRID_VALUES = GRID_NUMBERS[i];
-			//cell.innerHTML = GRID_VALUES
+            cell.innerHTML = GRID_NUMBERS[i];
 			i= i+1;
-            cell.addEventListener('click',(function(el,r,c,i,GRID_VALUES){
-				return function(){
-                    callback(el,r,c,i,GRID_VALUES);
+            cell.addEventListener('click',(function(el,r,c,i){
+                return function(){
+                    callback(el,r,c,i);
                 }
-            })(cell,r,c,i,GRID_VALUES),false);
+            })(cell,r,c,i),false);
         }
     }
     return grid;

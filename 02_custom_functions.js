@@ -54,6 +54,20 @@ function createGRID(width, height){
   return GRID_array;
 }
 
+/*  //2-dim array try
+
+function create_2DGRID(width, height){
+	var GRID_array = new Array(width);
+	for(var i = 0;i< width;i++){
+  	GRID_array[i] = new Array(height);
+    for(var j=0;j<height;j++){
+  		GRID_array[i][j] = Math.floor(Math.random() * 100) +1;
+    }
+  }
+  return GRID_array;
+}
+*/
+
 
 /*
 // GridWorld with numbers
