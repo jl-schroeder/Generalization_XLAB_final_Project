@@ -7,12 +7,67 @@
 const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
 
+/*
+const arr_dim = 3;
+var array_2D = new Array(arr_dim);
+
+for (i = 0; i <= arr_dim; i++) {
+	array_2D[i] = new Array(arr_dim);
+}
+
+for (i = 0; i <= arr_dim; i++) {
+	for (j = 0; j <= arr_dim; j++) {
+  	array[i][j] = Math.floor(Math.random() * 100 ) + 1;
+}
+*/
+
 
 
 /* Helper functions
 *
 *
 */
+
+// This is a function that creates a 2-dim array with random numbers, does not work right now :/
+/*
+function createGRID(width, height){
+	var GRID_array = [];
+	for(var i = 0;i < width*height;i++){
+  	GRID_array[i] = i;
+  }
+  return GRID_array;
+}
+
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}*/
+
+function createGRID(width, height){
+	var GRID_array = [];
+	for(var i = 0;i< width*height;i++){
+  	GRID_array[i] = Math.floor(Math.random() * 100) +1;
+  }
+  return GRID_array;
+}
+
+/*  //2-dim array try
+
+function create_2DGRID(width, height){
+	var GRID_array = new Array(width);
+	for(var i = 0;i< width;i++){
+  	GRID_array[i] = new Array(height);
+    for(var j=0;j<height;j++){
+  		GRID_array[i][j] = Math.floor(Math.random() * 100) +1;
+    }
+  }
+  return GRID_array;
+}
+*/
+
 
 /*
 // GridWorld with numbers
@@ -29,7 +84,7 @@ var grid = clickableGrid(11,11,function(el,row,col,i){
 });
 
 document.body.appendChild(grid);
- 
+
  */
 
 
@@ -51,7 +106,7 @@ const generateID = function(len) {
 
 
 
-/* Hooks  
+/* Hooks
 *
 *
 */
