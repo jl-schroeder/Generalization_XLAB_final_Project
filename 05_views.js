@@ -23,14 +23,17 @@ const intro = babeViews.view_generator("intro",{
     trials: 1,
     name: 'intro',
     // If you use JavaScripts Template String `I am a Template String`, you can use HTML <></> and javascript ${} inside
-    text:   `This is a sample introduction view.
+    text:   `Introduction:
             <br />
             <br />
-            The introduction view welcomes the participant and gives general information
-            about the experiment. You are in the <strong>${coin}</strong> group.
+            Hello participant.
+			<br />
+			You are in the <strong>${coin}</strong> group.
+			<br />
+			Therefore you have <strong>${numb_of_trials}</strong> clicks each trial.
             <br />
             <br />
-            This is a minimal experiment with one forced choice view. It can serve as a starting point for programming your own experiment.`,
+            This is a experiment where you have to click into a grid in order to fulfill your goal.`,
    buttonText: 'Begin the experiment'
 });
 
@@ -115,6 +118,10 @@ const forced_choice_2A = babeViews.view_generator("forced_choice", {
     // }
 });
 
+// There are many more templates available:
+// forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
+// key_press, self_paced_reading and self_paced_reading_rating_scale
+
 /*
 const instructions = babeViews.view_generator("gridWorld", {
 trials: trial_info.gridWorld.length,
@@ -124,23 +131,25 @@ data: trial_info.gridWorld,
 
 
 
-const main_exp =  {
-	trials : 1,
+const main_exp = /*babeViews.view_generator*/({
+	trials : numb_of_trials,
 	name: 'main_exp',
 	render : function(CT) {
 	var lastClicked;
 	var GRID_VALUES = 0;
-	var final_value = 0
-
+	var final_value = 0;
+	var stepper = 0;
+	
 	// constants to decide how wide and long the grid should be
 	const width_grid = 11;
 	const length_grid = 11;
 
 	// 2-dim array to decide how far the clicks are away from each other
-	var coordinates = [];  //new Array(width_grid);
-	/* for(var i = 0; i < width_grid; i++){
-		coordinates = new Array(length_grid);
-	} */
+	var coordinates = [];
+	var row_calc = 0;
+	var col_calc = 0;
+	var coordinates_distance = 0;
+	var distance_list = [];
 
 	var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
 	el.innerHTML = val;
@@ -155,6 +164,18 @@ const main_exp =  {
 
 	console.log("Your current value is: ",final_value);
 	console.log(coordinates);
+	if(stepper==0){
+		console.log("You only clicked once.");
+	}else if(stepper>0){
+		coordinates_distance = (BETRAG(row - row_calc)+BETRAG(col-col_calc));
+		console.log("The distance to the previous click is: ",coordinates_distance);
+	}
+	distance_list.push(coordinates_distance);
+	//Test only:
+	console.log(distance_list);
+	
+	row_calc = row;
+	col_calc = col;
 
 	// Decide which color the element should get
 	if(val < 12){
@@ -202,7 +223,10 @@ const main_exp =  {
 		if (lastClicked) lastClicked.className='';
 		lastClicked = el+lastClicked;
 	}
-
+	/* else if(i==numb_of_trials){
+		
+	} */
+	stepper = stepper+1;
 });
 
 document.body.appendChild(grid);
@@ -231,8 +255,4 @@ function clickableGrid( rows, cols, callback ){
 
 	}
 
-}
-
-// There are many more templates available:
-// forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
-// key_press, self_paced_reading and self_paced_reading_rating_scale
+});

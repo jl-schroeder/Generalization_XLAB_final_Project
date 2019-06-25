@@ -6,6 +6,14 @@
 */
 const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
+var numb_of_trials = 0;
+
+if(coin == "head"){
+	numb_of_trials = 40;
+}else{
+	numb_of_trials = 20;
+}
+
 
 /*
 const arr_dim = 3;
@@ -28,24 +36,6 @@ for (i = 0; i <= arr_dim; i++) {
 *
 */
 
-// This is a function that creates a 2-dim array with random numbers, does not work right now :/
-/*
-function createGRID(width, height){
-	var GRID_array = [];
-	for(var i = 0;i < width*height;i++){
-  	GRID_array[i] = i;
-  }
-  return GRID_array;
-}
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}*/
-
 function createGRID(width, height){
 	var GRID_array = [];
 	for(var i = 0;i< width*height;i++){
@@ -54,38 +44,15 @@ function createGRID(width, height){
   return GRID_array;
 }
 
-/*  //2-dim array try
 
-function create_2DGRID(width, height){
-	var GRID_array = new Array(width);
-	for(var i = 0;i< width;i++){
-  	GRID_array[i] = new Array(height);
-    for(var j=0;j<height;j++){
-  		GRID_array[i][j] = Math.floor(Math.random() * 100) +1;
-    }
-  }
-  return GRID_array;
+function BETRAG(numb){
+	if(numb<0){
+		numb = numb*(-1);
+		return numb;
+	}else{
+		return numb;
+	}
 }
-*/
-
-
-/*
-// GridWorld with numbers
-var lastClicked;
-var grid = clickableGrid(11,11,function(el,row,col,i){
-    console.log("You clicked on element:",el);
-    console.log("You clicked on row:",row);
-    console.log("You clicked on col:",col);
-    console.log("You clicked on item #:",i);
-
-    el.className='clicked';
-    if (lastClicked) lastClicked.className='';
-    lastClicked = el;
-});
-
-document.body.appendChild(grid);
-
- */
 
 
 
