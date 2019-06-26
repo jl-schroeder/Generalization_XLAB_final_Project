@@ -131,14 +131,16 @@ data: trial_info.gridWorld,
 
 
 
-const main_exp = /*babeViews.view_generator*/({
-	trials : numb_of_trials,
+const main_exp = /*babeViews.view_generator*/ ({
+	trials :  1,// numb_of_trials,
 	name: 'main_exp',
+	//data: trial_info.empty,
 	render : function(CT) {
 	var lastClicked;
 	var GRID_VALUES = 0;
 	var final_value = 0;
 	var stepper = 0;
+
 	
 	// constants to decide how wide and long the grid should be
 	const width_grid = 11;
@@ -227,6 +229,18 @@ const main_exp = /*babeViews.view_generator*/({
 		
 	} */
 	stepper = stepper+1;
+	
+	if(stepper>numb_of_trials){
+		console.log("IT FINALLY WORKED, YEAAAAAAHHHHHHHHHH");
+		let csvContent = "data:text/csv;charset=utf-8,";
+		distance_list.forEach(function(rowArray){
+			let row = rowArray.join(".");
+			csvContent += row + "\r\n";
+			
+			var encodedUri = encodeURI(csvContent);
+			window.open(encodedUri);
+		});
+	}
 });
 
 document.body.appendChild(grid);

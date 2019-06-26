@@ -17,7 +17,10 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions,
+			//if(stepper <= numb_of_trials){
             main_exp,
+			//},
+			post_test,
             thanks,
         ],
         // Here, you can specify all information for the deployment
