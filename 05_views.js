@@ -23,15 +23,13 @@ const intro = babeViews.view_generator("intro",{
     trials: 1,
     name: 'intro',
     // If you use JavaScripts Template String `I am a Template String`, you can use HTML <></> and javascript ${} inside
-    text:   `Introduction:
+    text:   `Welcome to our experiment.
             <br />
             <br />
-            Hello participant.
-			<br />
-			You are in the <strong>$coin</strong> group.
+            In this experiment you will have to click on a grid, inorder to find values under the tiles and to fullfill your goal.
             <br />
             <br />
-            This is a experiment where you have to click into a grid in order to fulfill your goal.`,
+            When you are ready, click the button below:`,
    buttonText: 'Begin the experiment'
 });
 
@@ -39,14 +37,26 @@ const intro = babeViews.view_generator("intro",{
 const instructions = babeViews.view_generator("instructions",{
     trials: 1,
     name: 'instrucions',
-    title: 'General Instructions',
-    text:  `This is a sample instructions view.
+    title: 'Instructions',
+    text:  `You are in the <strong>${payoff_condition}</strong> group.
             <br />
             <br />
-            Tell your participants what they are to do here.`,
+            ${intro_helper}.
+			<br />
+            <br />
+			You can click either 20 of 40 times.`,
     buttonText: 'go to trials'
 });
 
+const understanding_check = babeViews.view_generator("instructions",{
+  trials: 1,
+  name: 'understanding_check',
+  title: 'Understanding',
+  text: `If you understood everything press the button below:
+  <br />`,
+  buttonText: 'start the experiment'
+
+});
 
 // In the post test questionnaire you can ask your participants addtional questions
 const post_test = babeViews.view_generator("post_test",{
@@ -120,151 +130,9 @@ const forced_choice_2A = babeViews.view_generator("forced_choice", {
 // forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
 // key_press, self_paced_reading and self_paced_reading_rating_scale
 
-/*
-const instructions = babeViews.view_generator("gridWorld", {
-trials: trial_info.gridWorld.length,
-name: 'instructions',
-data: trial_info.gridWorld,
-}); */
-
-
-
-const main_exp = /*babeViews.view_generator*/ ({
-	trials :  1,// numb_of_trials,
-	name: 'main_exp',
-	//data: trial_info.empty,
-	render : function(CT) {
-	var lastClicked;
-	var GRID_VALUES = 0;
-	var final_value = 0;
-	var stepper = 0;
-
-	
-	// constants to decide how wide and long the grid should be
-	const width_grid = 11;
-	const length_grid = 11;
-
-	// 2-dim array to decide how far the clicks are away from each other
-	var coordinates = [];
-	var row_calc = 0;
-	var col_calc = 0;
-	var coordinates_distance = 0;
-	var distance_list = [];
-
-	var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
-	el.innerHTML = val;
-	// console output for further analisation
-    console.log("You clicked on element:",el);
-	console.log("You clicked on the value:",val);
-    console.log("You clicked on row:",row);
-    console.log("You clicked on col:",col);
-	// stuff to analyse:
-	final_value = final_value + val;
-	coordinates.push([row,col]);
-
-	console.log("Your current value is: ",final_value);
-	console.log(coordinates);
-	if(stepper==0){
-		console.log("You only clicked once.");
-	}else if(stepper>0){
-		coordinates_distance = (BETRAG(row - row_calc)+BETRAG(col-col_calc));
-		console.log("The distance to the previous click is: ",coordinates_distance);
-	}
-	distance_list.push(coordinates_distance);
-	//Test only:
-	console.log(distance_list);
-	
-	row_calc = row;
-	col_calc = col;
-
-	// Decide which color the element should get
-	if(val < 12){
-		el.className='clicked_1';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 11 && val < 23){
-		el.className='clicked_2';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 22 && val < 34){
-		el.className='clicked_3';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 33 && val < 45) {
-		el.className='clicked_4';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 44 && val < 56){
-		el.className='clicked_5';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 55 && val < 67){
-		el.className='clicked_6';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 66 && val < 78){
-		el.className='clicked_7';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 77 && val < 90){
-		el.className='clicked_8';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	else if(val > 89){
-		el.className='clicked_9';
-		if (lastClicked) lastClicked.className='';
-		lastClicked = el+lastClicked;
-	}
-	/* else if(i==numb_of_trials){
-		
-	} */
-	stepper = stepper+1;
-	
-	if(stepper>numb_of_trials[stepper]){
-		console.log("IT FINALLY WORKED, YEAAAAAAHHHHHHHHHH");
-		let csvContent = "data:text/csv;charset=utf-8,";
-		distance_list.forEach(function(rowArray){
-			let row = rowArray.join(".");
-			csvContent += row + "\r\n";
-			
-			var encodedUri = encodeURI(csvContent);
-			window.open(encodedUri);
-		});
-	}
-});
-
-document.body.appendChild(grid);
-
-function clickableGrid( rows, cols, callback ){
-	var GRID_NUMBERS = createGRID(length_grid,width_grid);
-    var i=0;
-    var grid = document.createElement('table');
-    grid.className = 'grid';
-    for (var r=0;r<rows;++r){
-        var tr = grid.appendChild(document.createElement('tr'));
-        for (var c=0;c<cols;++c){
-            var cell = tr.appendChild(document.createElement('td'));
-            GRID_VALUES = GRID_NUMBERS[i];
-			//cell.innerHTML = GRID_VALUES
-			i= i+1;
-            cell.addEventListener('click',(function(el,r,c,i,GRID_VALUES){
-				return function(){
-                    callback(el,r,c,i,GRID_VALUES);
-                }
-            })(cell,r,c,i,GRID_VALUES),false);
-        }
-    }
-    return grid;
-	}
-
-	}
-
-});
+const grid_search = main_exp(  {
+    trials: 8,
+    name: 'grid_search',
+    data: trial_info.main_exp,
+  }
+);

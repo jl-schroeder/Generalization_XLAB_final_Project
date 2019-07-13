@@ -17,10 +17,9 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions,
-			//if(stepper <= numb_of_trials){
-            main_exp,
-			//},
-			post_test,
+            understanding_check,
+            grid_search,
+            post_test,
             thanks,
         ],
         // Here, you can specify all information for the deployment
@@ -31,19 +30,18 @@ $("document").ready(function() {
             // "debug" and "directLink"
             // As well as "MTurk", "MTurkSandbox" and "Prolific"
             deployMethod: "debug",
-            contact_email: "YOUREMAIL@wherelifeisgreat.you",
+            contact_email: "janlschroede@uos.de",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
         // Here, you can specify how the progress bar should look like
-		
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                main_exp.name,
+                grid_search.name,
             ],
              // Possible styles are "default", "separate" and "chunks"
-            style: "separate",
+            style: "seperate",
             width: 100
-        } 
+        }
     });
 });
