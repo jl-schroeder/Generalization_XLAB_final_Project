@@ -28,9 +28,7 @@ const intro = babeViews.view_generator("intro",{
             <br />
             Hello participant.
 			<br />
-			You are in the <strong>${coin}</strong> group.
-			<br />
-			Therefore you have <strong>${numb_of_trials}</strong> clicks each trial.
+			You are in the <strong>$coin</strong> group.
             <br />
             <br />
             This is a experiment where you have to click into a grid in order to fulfill your goal.`,
@@ -230,7 +228,7 @@ const main_exp = /*babeViews.view_generator*/ ({
 	} */
 	stepper = stepper+1;
 	
-	if(stepper>numb_of_trials){
+	if(stepper>numb_of_trials[stepper]){
 		console.log("IT FINALLY WORKED, YEAAAAAAHHHHHHHHHH");
 		let csvContent = "data:text/csv;charset=utf-8,";
 		distance_list.forEach(function(rowArray){

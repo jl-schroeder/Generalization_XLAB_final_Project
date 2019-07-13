@@ -7,13 +7,17 @@
 const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
 var numb_of_trials = 0;
-
+ /*
 if(coin == "head"){
 	numb_of_trials = 40;
 }else{
 	numb_of_trials = 20;
-}
+} */
+const numb_of_trials = [40,20,40,20,40,20,40,20];
 
+
+const enviroment = _.sample(["rough", "smooth"]);
+const payoff_condition = _.sample(["Maximization","Accumulation"]);
 
 /*
 const arr_dim = 3;
