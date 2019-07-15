@@ -26,10 +26,22 @@ const intro = babeViews.view_generator("intro",{
     text:   `Welcome to our experiment.
             <br />
             <br />
-            In this experiment you will have to click on a grid, inorder to find values under the tiles and to fullfill your goal.
+            <strong>Please read the following instructions very carefully:</strong> <br />
+            In the following pages, you will be presented with a series of <strong>8 different grids to explore.</strong>
+            By clicking on tiles in the grid, you unveil points that are associated to the location on the grid. <br />
+            On each grid, you will have <strong>either 20 or 40 clicks</strong>, with the number of remaining clicks displayed above the grid. <br />
+            When the current number of clicks are over, the next trial begins with an unexplored grid.
+            <br />
+            Your task is to gain as many points as possible through all eight different grids.
             <br />
             <br />
-            When you are ready, click the button below:`,
+            Each grid starts with a single tile revealed.
+            Using your mouse, click on unexplored tiles to reveal a number corresponding to the number of points you gain.
+            Note that the revealed tiles are colour-coded to assist you in this task.
+            The darker the colour, the higher the reward.
+            Points that you may gain are clustered on the grid.
+            This means, areas with high value points appear close to each other and areas of low-value points appear close to each other.
+`,
    buttonText: 'Begin the experiment'
 });
 
@@ -41,22 +53,19 @@ const instructions = babeViews.view_generator("instructions",{
     text:  `You are in the <strong>${payoff_condition}</strong> group.
             <br />
             <br />
-            ${intro_helper}.
-			<br />
+            Summarized Instructions:<br />
             <br />
-			You can click either 20 of 40 times.`,
+            <strong>1. </strong>     On this grid with 11x11 tiles, points that you gain are revealed upon mouse-click. The tiles are colored corresponding to the gained points.<br />
+            <strong>2. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
+            <strong>3. </strong>     On this page, you can also see how many clicks are left in the current trial.<br />
+            <strong>4. </strong>     There are 8 different grids, each with either 20 or 40 clicks (alternating).<br />
+            <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
+            <br />
+            <br />
+            ${intro_helper}`,
     buttonText: 'go to trials'
 });
 
-const understanding_check = babeViews.view_generator("instructions",{
-  trials: 1,
-  name: 'understanding_check',
-  title: 'Understanding',
-  text: `If you understood everything press the button below:
-  <br />`,
-  buttonText: 'start the experiment'
-
-});
 
 // In the post test questionnaire you can ask your participants addtional questions
 const post_test = babeViews.view_generator("post_test",{
@@ -129,6 +138,22 @@ const forced_choice_2A = babeViews.view_generator("forced_choice", {
 // There are many more templates available:
 // forced_choice, slider_rating, dropdown_choice, testbox_input, rating_scale, image_selection, sentence_choice,
 // key_press, self_paced_reading and self_paced_reading_rating_scale
+
+const understanding_check = babeViews.view_generator("instructions",{
+  trials: 1,
+  name: 'understanding_check',
+  title: 'Understanding',
+  text: `If you understood everything press the button below:
+  <br />`,
+  buttonText: 'start the experiment'
+
+});
+
+const grid_search_test = test_exp({
+      trials: 1,
+      name: 'grid_search_test',
+      data: trial_info.test_exp,
+});
 
 const grid_search = main_exp(  {
     trials: 8,

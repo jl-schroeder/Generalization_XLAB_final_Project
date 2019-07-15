@@ -19,19 +19,35 @@ const main_exp = function(config) {
       // Here, you can do whatever you want, eventually you should call babe.findNextView()
       // to proceed to the next view and if it is an trial type view,
       // you should save the trial information with babe.trial_data.push(trial_data)
-
+      var testymesty = numb_of_trials[CT];
       // Normally, you want to display some kind of html, to do this you append your html to the main element
       // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators["<view_name>"](config, CT)
       $("main").html(`<div class='babe-view'>
-      <h1 class='babe-view-title'>Click on the grid!</h1>
-      <p>You have<strong><div id="divMsg"></div></strong></p>
-      <p>clicks left</p>
-      <script>document.getElementById("divMsg").innerHTML = (numb_of_trials[CT]-stepper)</script>
+      <h1 class='babe-view-title'>
+        Click on the grid!
+      </h1>
+      <p>Your goal:</p>
+      <div id="goalName"></div>
+      <br />
+      <p>You have
+        <b>
+          <div3 id="divMsg"></div3>
+        </b>
+      </p>
+      <p1>
+        clicks left
+      </p1>
+      <script>
+        document.getElementById("goalName").innerHTML = payoff_condition;
+        document.getElementById("divMsg").innerHTML = testymesty;
+      </script>
       </div>`);
 
       // This function will handle  the response
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
-        document.getElementById("divMsg").innerHTML = (numb_of_trials[CT]-stepper);
+        document.getElementById("divMsg").innerHTML = (numb_of_trials[CT]-(stepper+1));
+        var tile_number = ((row*11)+col);
+        val = Math.round(kernel_file["0"][tile_number]["y"]*100);
         el.innerHTML = val;
         // console output for further analisation
         console.log("You clicked on element:",el);
@@ -103,26 +119,15 @@ const main_exp = function(config) {
           if (lastClicked) lastClicked.className='';
           lastClicked = el+lastClicked;
         }
-
       stepper = stepper+1;
-
-      /*
-      if(stepper>numb_of_trials[stepper]){
-        console.log("IT FINALLY WORKED");
-        let csvContent = "data:text/csv;charset=utf-8,";
-        distance_list.forEach(function(rowArray){
-          let row = rowArray.join(".");
-          csvContent += row + "\r\n";
-
-          var encodedUri = encodeURI(csvContent);
-          window.open(encodedUri);
-        });
-      } */
 
       // save data in trial_data
       let trial_data = {
         trial_name: config.name,
+        participant_ID: participantID,
+        horizonSize: numb_of_trials[CT],
         trial_number: CT + 1,
+        number_of_clicks: stepper,
         value: val,
         final_points: final_value,
         x_coordinate: row,
@@ -133,16 +138,7 @@ const main_exp = function(config) {
       // push the data to the csv
       babe.trial_data.push(trial_data);
 
-    /*if(stepper == 2{
-        bul_checker = true;
-        return;
-        //el.innerHTML = val;
-        //setTimeout(3000);
-      }*/
-
-      if(stepper ==  numb_of_trials[CT]){
-        //el.innerHTML = val;
-        //setTimeout(3000);
+      if(stepper ==  10 /*numb_of_trials[CT]*/){
         babe.findNextView();
         document.body.removeChild(grid);
         stepper = 0;
@@ -151,13 +147,131 @@ const main_exp = function(config) {
 
     });
 
-    /*if(bul_checker == true){
-      bul_checker = false;
-      babe.findNextView();
-      document.body.removeChild(grid);
-      stepper = 0;
-      final_value = 0;
-    }*/
+    document.body.appendChild(grid);
+    current_exp_number += 1;
+  }
+};
+// We have to return the view, so that it can be used in 05_views.js
+return view;
+}
+
+const test_exp = function(config) {
+  const view = {
+    name: config.name,
+    CT: 0,
+    trials: config.trials,
+    // The render functions gets the babe object as well as the current trial in view counter as input
+    render: function (CT, babe) {
+      // Here, you can do whatever you want, eventually you should call babe.findNextView()
+      // to proceed to the next view and if it is an trial type view,
+      // you should save the trial information with babe.trial_data.push(trial_data)
+
+      // Normally, you want to display some kind of html, to do this you append your html to the main element
+      // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators["<view_name>"](config, CT)
+      $("main").html(`<div class='babe-view'>
+      <h1 class='babe-view-title'>
+        Click on the grid! - Test run!
+      </h1>
+      <p>You have
+        <b>
+          <div3 id="divMsg"></div3>
+        </b>
+      </p>
+      <p1>
+        clicks left
+      </p1>
+      <script>
+        document.getElementById("divMsg").innerHTML = (5);
+      </script>
+      </div>`);
+
+      // This function will handle  the response
+      var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
+        document.getElementById("divMsg").innerHTML = (5-(stepper+1));
+        var tile_number = ((row*11)+col);
+        val = Math.round(kernel_file["0"][tile_number]["y"]*100);
+        el.innerHTML = val;
+
+        // console output for further analisation
+        console.log("You clicked on element:",el);
+        console.log("You clicked on the value:",val);
+        console.log("You clicked on row:",row);
+        console.log("You clicked on col:",col);
+        // stuff to analyse:
+        final_value = final_value + val;
+        coordinates.push([row,col]);
+
+        console.log("Your current value is: ",final_value);
+        console.log(coordinates);
+        if(stepper==0){
+          console.log("You only clicked once.");
+        }else if(stepper>0){
+          coordinates_distance = (BETRAG(row - row_calc)+BETRAG(col-col_calc));
+          console.log("The distance to the previous click is: ",coordinates_distance);
+        }
+        distance_list.push(coordinates_distance);
+        //Test only:
+        console.log(distance_list);
+
+        row_calc = row;
+        col_calc = col;
+
+        // Decide which color the element should get
+        if(val < 12){
+          el.className='clicked_1';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 11 && val < 23){
+          el.className='clicked_2';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 22 && val < 34){
+          el.className='clicked_3';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 33 && val < 45) {
+          el.className='clicked_4';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 44 && val < 56){
+          el.className='clicked_5';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 55 && val < 67){
+          el.className='clicked_6';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 66 && val < 78){
+          el.className='clicked_7';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 77 && val < 90){
+          el.className='clicked_8';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+        else if(val > 89){
+          el.className='clicked_9';
+          if (lastClicked) lastClicked.className='';
+          lastClicked = el+lastClicked;
+        }
+      stepper = stepper+1;
+
+      if(stepper == 5){
+        babe.findNextView();
+        document.body.removeChild(grid);
+        stepper = 0;
+        final_value = 0;
+      }
+
+    });
 
     document.body.appendChild(grid);
     current_exp_number += 1;
