@@ -10,6 +10,7 @@
 //const numb_of_trials = [40,20,40,20,40,20,40,20];
 //const enviroment = _.sample(["rough", "smooth"]);
 var payoff_condition = _.shuffle(["Maximization", "Maximization", "Maximization", "Maximization", "Accumulation", "Accumulation", "Accumulation", "Accumulation"]);
+var kernel_number = _.shuffle([0,1,2,3,4,5,6,7]);
 var intro_helper = "";
 
 /*if(payoff_condition == "Maximization"){

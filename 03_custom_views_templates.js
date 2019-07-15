@@ -55,7 +55,7 @@ const main_exp = function(config) {
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
         document.getElementById("divMsg").innerHTML = (30-(stepper+1));
         var tile_number = ((row*11)+col);
-        val = Math.round(kernel_file["0"][tile_number]["y"]*100);
+        val = Math.round(kernel_file[kernel_number[CT]][tile_number]["y"]*100);
         el.innerHTML = val;
         // console output for further analisation
         console.log("You clicked on element:",el);
@@ -139,7 +139,7 @@ const main_exp = function(config) {
         value: val,
         final_points: final_value,
         x_coordinate: row,
-        y_coorinate: col,
+        y_coordinate: col,
         goal: payoff_condition,
       }
 
