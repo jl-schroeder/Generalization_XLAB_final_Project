@@ -29,7 +29,7 @@ const intro = babeViews.view_generator("intro",{
             <strong>Please read the following instructions very carefully:</strong> <br />
             In the following pages, you will be presented with a series of <strong>8 different grids to explore.</strong>
             By clicking on tiles in the grid, you unveil points that are associated to the location on the grid. <br />
-            On each grid, you will have <strong>either 20 or 40 clicks</strong>, with the number of remaining clicks displayed above the grid. <br />
+            On each grid, you will have <strong>30 clicks</strong>, with the number of remaining clicks displayed above the grid. <br />
             When the current number of clicks are over, the next trial begins with an unexplored grid.
             <br />
             Your task is to gain as many points as possible through all eight different grids.
@@ -55,7 +55,7 @@ const instructions = babeViews.view_generator("instructions",{
             <strong>1. </strong>     On this grid with 11x11 tiles, points that you gain are revealed upon mouse-click. The tiles are colored corresponding to the gained points.<br />
             <strong>2. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
             <strong>3. </strong>     On this page, you can also see how many clicks are left in the current trial.<br />
-            <strong>4. </strong>     There are 8 different grids, each with either 20 or 40 clicks (alternating).<br />
+            <strong>4. </strong>     There are 8 different grids, each with 30 clicks.<br />
             <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
             <br />
             <br />`,
