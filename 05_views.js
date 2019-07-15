@@ -50,10 +50,7 @@ const instructions = babeViews.view_generator("instructions",{
     trials: 1,
     name: 'instrucions',
     title: 'Instructions',
-    text:  `You are in the <strong>${payoff_condition}</strong> group.
-            <br />
-            <br />
-            Summarized Instructions:<br />
+    text:  `Summarized Instructions:<br />
             <br />
             <strong>1. </strong>     On this grid with 11x11 tiles, points that you gain are revealed upon mouse-click. The tiles are colored corresponding to the gained points.<br />
             <strong>2. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
@@ -62,7 +59,7 @@ const instructions = babeViews.view_generator("instructions",{
             <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
             <br />
             <br />`,
-    buttonText: 'go to trials'
+    buttonText: 'go to test-trial'
 });                                                     //${intro_helper}`,
 
 
