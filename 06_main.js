@@ -41,7 +41,7 @@ $("document").ready(function() {
                 grid_search.name,
             ],
              // Possible styles are "default", "separate" and "chunks"
-            style: "seperate",
+            style: "separate",
             width: 100
         }
     });

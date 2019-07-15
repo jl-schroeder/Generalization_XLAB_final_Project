@@ -24,21 +24,14 @@ const main_exp = function(config) {
       // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators["<view_name>"](config, CT)
       $("main").html(`<div class='babe-view'>
       <h1 class='babe-view-title'>
-        Click on the grid!
+      Click on the grid!
       </h1>
-      <p>Your goal:</p>
-      <div id="goalName"></div>
-      <br />
       <div id="goalDescr"></div>
       <br />
-      <p>You have
-        <b>
-          <div3 id="divMsg"></div3>
-        </b>
-      </p>
-      <p1>
-        clicks left
-      </p1>
+      <div id="divMsg"></div>
+      <br />
+      <div id="maxRew"></div>
+      <div id="combRew"></div>
       </div>`);
       //script for the html part:
       if(payoff_condition[CT] == "Maximization"){
@@ -46,40 +39,55 @@ const main_exp = function(config) {
       } else if(payoff_condition[CT] == "Accumulation"){
         intro_helper = "Your goal is to get the maximal combined value of all tiles combined you click on";
       }
-      document.getElementById("goalDescr").innerHTML = intro_helper;
-      document.getElementById("goalName").innerHTML = payoff_condition[CT];
-      document.getElementById("divMsg").innerHTML = 30;
+      var maxREWARD = 0;
+      var maxScale = getRandomArbitrary(65,85);
+      document.getElementById("goalDescr").innerHTML = "Your goal is: " + payoff_condition[CT] + "<br />" + intro_helper;
+      document.getElementById("divMsg").innerHTML = "You have 30 clicks left."; // show how many clicks are left
+      if(payoff_condition[CT] == "Maximization"){
+        document.getElementById("maxRew").innerHTML = "Current maximal reward: "
+      } else if(payoff_condition[CT] == "Accumulation"){
+      document.getElementById("combRew").innerHTML = "Current combined reward: "
+      }
+
 
 
       // This function will handle  the response
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
-        document.getElementById("divMsg").innerHTML = (30-(stepper+1));
+        document.getElementById("divMsg").innerHTML = "You have " + (30-(stepper+1)).toString() + " clicks left."; // show how many clicks are left
         var tile_number = ((row*11)+col);
-        val = Math.round(kernel_file[kernel_number[CT]][tile_number]["y"]*100);
-        el.innerHTML = val;
+        val = Math.round(kernel_file[kernel_number[CT]][tile_number]["y"]*maxScale);
+        // show current maximal reward on html page:
+        if(val > maxREWARD){
+          maxREWARD = val;
+        }
+        if(payoff_condition[CT] == "Maximization"){
+        document.getElementById("maxRew").innerHTML = "Current maximal reward: " + maxREWARD.toString();
+        }
+
+        el.innerHTML = val; // assign value to tile
+
         // console output for further analisation
-        console.log("You clicked on element:",el);
-        console.log("You clicked on the value:",val);
-        console.log("You clicked on row:",row);
-        console.log("You clicked on col:",col);
-        // stuff to analyse:
+        //console.log("You clicked on element:",el);
+        //console.log("You clicked on the value:",val);
+        //console.log("You clicked on row:",row);
+        //console.log("You clicked on col:",col);
+
+        // combined value of the values of each click
         final_value = final_value + val;
+
+        // show final value on html page
+        if(payoff_condition[CT] == "Accumulation"){
+        document.getElementById("combRew").innerHTML = "Current combined reward: " + final_value.toString();
+        }
+        
         coordinates.push([row,col]);
 
-        console.log("Your current value is: ",final_value);
-        console.log(coordinates);
-        if(stepper==0){
-          console.log("You only clicked once.");
-        }else if(stepper>0){
-          coordinates_distance = (BETRAG(row - row_calc)+BETRAG(col-col_calc));
-          console.log("The distance to the previous click is: ",coordinates_distance);
-        }
-        distance_list.push(coordinates_distance);
-        //Test only:
-        console.log(distance_list);
+        //console.log("Your current value is: ",final_value);
+        //console.log(coordinates);
 
-        row_calc = row;
-        col_calc = col;
+
+        //row_calc = row;
+        //col_calc = col;
 
         // Decide which color the element should get
         if(val < 12){
@@ -127,40 +135,40 @@ const main_exp = function(config) {
           if (lastClicked) lastClicked.className='';
           lastClicked = el+lastClicked;
         }
-      stepper = stepper+1;
+        stepper = stepper+1;
 
-      // save data in trial_data
-      let trial_data = {
-        trial_name: config.name,
-        participant_ID: participantID,
-        horizonSize: 30,//numb_of_trials[CT],
-        trial_number: CT + 1,
-        number_of_clicks: stepper,
-        value: val,
-        final_points: final_value,
-        x_coordinate: row,
-        y_coordinate: col,
-        goal: payoff_condition[CT],
-      }
+        // save data in trial_data
+        let trial_data = {
+          trial_name: config.name,
+          participant_ID: participantID,
+          horizonSize: 30, //numb_of_trials[CT],
+          trial_number: CT + 1,
+          number_of_clicks: stepper,
+          value: val,
+          final_points: final_value,
+          x_coordinate: row,
+          y_coordinate: col,
+          goal: payoff_condition[CT],
+        }
 
-      // push the data to the csv
-      babe.trial_data.push(trial_data);
+        // push the data to the csv
+        babe.trial_data.push(trial_data);
 
-      if(stepper ==  30 /*numb_of_trials[CT]*/){
-        babe.findNextView();
-        document.body.removeChild(grid);
-        stepper = 0;
-        final_value = 0;
-      }
+        if(stepper ==  30 /*numb_of_trials[CT]*/){
+          babe.findNextView();
+          document.body.removeChild(grid);
+          stepper = 0;
+          final_value = 0;
+        }
 
-    });
+      });
 
-    document.body.appendChild(grid);
-    current_exp_number += 1;
-  }
-};
-// We have to return the view, so that it can be used in 05_views.js
-return view;
+      document.body.appendChild(grid);
+      current_exp_number += 1;
+    }
+  };
+  // We have to return the view, so that it can be used in 05_views.js
+  return view;
 }
 
 
@@ -179,18 +187,18 @@ const test_exp = function(config) {
       // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators["<view_name>"](config, CT)
       $("main").html(`<div class='babe-view'>
       <h1 class='babe-view-title'>
-        Click on the grid! - Test run!
+      Click on the grid! - Test run!
       </h1>
       <p>You have
-        <b>
-          <div3 id="divMsg"></div3>
-        </b>
+      <b>
+      <div3 id="divMsg"></div3>
+      </b>
       </p>
       <p1>
-        clicks left
+      clicks left
       </p1>
       <script>
-        document.getElementById("divMsg").innerHTML = (5);
+      document.getElementById("divMsg").innerHTML = (5);
       </script>
       </div>`);
 
@@ -202,28 +210,19 @@ const test_exp = function(config) {
         el.innerHTML = val;
 
         // console output for further analisation
-        console.log("You clicked on element:",el);
-        console.log("You clicked on the value:",val);
-        console.log("You clicked on row:",row);
-        console.log("You clicked on col:",col);
+        //console.log("You clicked on element:",el);
+        //console.log("You clicked on the value:",val);
+        //console.log("You clicked on row:",row);
+        //console.log("You clicked on col:",col);
         // stuff to analyse:
         final_value = final_value + val;
         coordinates.push([row,col]);
 
-        console.log("Your current value is: ",final_value);
-        console.log(coordinates);
-        if(stepper==0){
-          console.log("You only clicked once.");
-        }else if(stepper>0){
-          coordinates_distance = (BETRAG(row - row_calc)+BETRAG(col-col_calc));
-          console.log("The distance to the previous click is: ",coordinates_distance);
-        }
-        distance_list.push(coordinates_distance);
-        //Test only:
-        console.log(distance_list);
+        //console.log("Your current value is: ",final_value);
+        //console.log(coordinates);
 
-        row_calc = row;
-        col_calc = col;
+        //row_calc = row;
+        //col_calc = col;
 
         // Decide which color the element should get
         if(val < 12){
@@ -271,21 +270,21 @@ const test_exp = function(config) {
           if (lastClicked) lastClicked.className='';
           lastClicked = el+lastClicked;
         }
-      stepper = stepper+1;
+        stepper = stepper+1;
 
-      if(stepper == 5){
-        babe.findNextView();
-        document.body.removeChild(grid);
-        stepper = 0;
-        final_value = 0;
-      }
+        if(stepper == 5){
+          babe.findNextView();
+          document.body.removeChild(grid);
+          stepper = 0;
+          final_value = 0;
+        }
 
-    });
+      });
 
-    document.body.appendChild(grid);
-    current_exp_number += 1;
-  }
-};
-// We have to return the view, so that it can be used in 05_views.js
-return view;
+      document.body.appendChild(grid);
+      current_exp_number += 1;
+    }
+  };
+  // We have to return the view, so that it can be used in 05_views.js
+  return view;
 }

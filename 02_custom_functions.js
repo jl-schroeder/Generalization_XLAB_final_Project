@@ -47,8 +47,8 @@ const length_grid = 11;
 var coordinates = [];
 var row_calc = 0;
 var col_calc = 0;
-var coordinates_distance = 0;
-var distance_list = [];
+//var coordinates_distance = 0;
+//var distance_list = [];
 
 
 /* Helper functions
@@ -93,6 +93,9 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 // Build the Clickable Grid
 function clickableGrid( rows, cols, callback ){

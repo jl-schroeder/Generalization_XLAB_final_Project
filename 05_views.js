@@ -142,7 +142,6 @@ const understanding_check = babeViews.view_generator("instructions",{
   text: `If you understood everything press the button below:
   <br />`,
   buttonText: 'start the experiment'
-
 });
 
 const grid_search_test = test_exp({
