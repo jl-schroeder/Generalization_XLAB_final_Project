@@ -140,7 +140,7 @@ const main_exp = function(config) {
         final_points: final_value,
         x_coordinate: row,
         y_coordinate: col,
-        goal: payoff_condition,
+        goal: payoff_condition[CT],
       }
 
       // push the data to the csv
