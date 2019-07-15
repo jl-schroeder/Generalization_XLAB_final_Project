@@ -19,7 +19,7 @@ const main_exp = function(config) {
       // Here, you can do whatever you want, eventually you should call babe.findNextView()
       // to proceed to the next view and if it is an trial type view,
       // you should save the trial information with babe.trial_data.push(trial_data)
-      var testymesty = numb_of_trials[CT];
+
       // Normally, you want to display some kind of html, to do this you append your html to the main element
       // You could use one of our predefined html-templates, with (babe.)stimulus_container_generators["<view_name>"](config, CT)
       $("main").html(`<div class='babe-view'>
@@ -29,6 +29,8 @@ const main_exp = function(config) {
       <p>Your goal:</p>
       <div id="goalName"></div>
       <br />
+      <div id="goalDescr"></div>
+      <br />
       <p>You have
         <b>
           <div3 id="divMsg"></div3>
@@ -37,15 +39,21 @@ const main_exp = function(config) {
       <p1>
         clicks left
       </p1>
-      <script>
-        document.getElementById("goalName").innerHTML = payoff_condition;
-        document.getElementById("divMsg").innerHTML = testymesty;
-      </script>
       </div>`);
+      //script for the html part:
+      if(payoff_condition[CT] == "Maximization"){
+        intro_helper = "Your goal is to find the tile with the maximal value";
+      } else if(payoff_condition[CT] == "Accumulation"){
+        intro_helper = "Your goal is to get the maximal combined value of all tiles combined you click on";
+      }
+      document.getElementById("goalDescr").innerHTML = intro_helper;
+      document.getElementById("goalName").innerHTML = payoff_condition[CT];
+      document.getElementById("divMsg").innerHTML = 30;
+
 
       // This function will handle  the response
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
-        document.getElementById("divMsg").innerHTML = (numb_of_trials[CT]-(stepper+1));
+        document.getElementById("divMsg").innerHTML = (30-(stepper+1));
         var tile_number = ((row*11)+col);
         val = Math.round(kernel_file["0"][tile_number]["y"]*100);
         el.innerHTML = val;
@@ -125,7 +133,7 @@ const main_exp = function(config) {
       let trial_data = {
         trial_name: config.name,
         participant_ID: participantID,
-        horizonSize: numb_of_trials[CT],
+        horizonSize: 30,//numb_of_trials[CT],
         trial_number: CT + 1,
         number_of_clicks: stepper,
         value: val,
@@ -138,7 +146,7 @@ const main_exp = function(config) {
       // push the data to the csv
       babe.trial_data.push(trial_data);
 
-      if(stepper ==  10 /*numb_of_trials[CT]*/){
+      if(stepper ==  30 /*numb_of_trials[CT]*/){
         babe.findNextView();
         document.body.removeChild(grid);
         stepper = 0;
@@ -154,6 +162,7 @@ const main_exp = function(config) {
 // We have to return the view, so that it can be used in 05_views.js
 return view;
 }
+
 
 const test_exp = function(config) {
   const view = {

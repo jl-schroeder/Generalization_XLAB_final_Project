@@ -4,19 +4,19 @@
 *
 *
 */
-const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
+//const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
 
-const numb_of_trials = [40,20,40,20,40,20,40,20];
-const enviroment = _.sample(["rough", "smooth"]);
-const payoff_condition = _.sample(["Maximization","Accumulation"]);
+//const numb_of_trials = [40,20,40,20,40,20,40,20];
+//const enviroment = _.sample(["rough", "smooth"]);
+var payoff_condition = _.shuffle(["Maximization", "Maximization", "Maximization", "Maximization", "Accumulation", "Accumulation", "Accumulation", "Accumulation"]);
 var intro_helper = "";
 
-if(payoff_condition == "Maximization"){
+/*if(payoff_condition == "Maximization"){
 	intro_helper = "Your goal is to find the tile with the maximal value";
 } else if(payoff_condition == "Accumulation"){
 	intro_helper = "Your goal is to get the maximal combined value of all tiles combined you click on";
-}
+} */
 
 var lastClicked;
 //var bul_checker = false;

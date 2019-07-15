@@ -38,7 +38,6 @@ $("document").ready(function() {
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                grid_search_test.name,
                 grid_search.name,
             ],
              // Possible styles are "default", "separate" and "chunks"

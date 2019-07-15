@@ -61,10 +61,9 @@ const instructions = babeViews.view_generator("instructions",{
             <strong>4. </strong>     There are 8 different grids, each with either 20 or 40 clicks (alternating).<br />
             <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
             <br />
-            <br />
-            ${intro_helper}`,
+            <br />`,
     buttonText: 'go to trials'
-});
+});                                                     //${intro_helper}`,
 
 
 // In the post test questionnaire you can ask your participants addtional questions
