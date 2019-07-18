@@ -60,7 +60,7 @@ const instructions = babeViews.view_generator("instructions",{
             <br />
             <br />`,
     buttonText: 'go to test-trial'
-});                                                     //${intro_helper}`,
+});                                                     
 
 
 // In the post test questionnaire you can ask your participants addtional questions

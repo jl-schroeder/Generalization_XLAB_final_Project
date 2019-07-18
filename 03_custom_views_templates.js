@@ -48,12 +48,16 @@ const main_exp = function(config) {
       } else if(payoff_condition[CT] == "Accumulation"){
       document.getElementById("combRew").innerHTML = "Current combined reward: "
       }
+      setTimeout(function () {
+        alert("If you feel ready to start the trial press OK or press ENTER");
+      }, 1);
 
 
 
       // This function will handle  the response
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
         document.getElementById("divMsg").innerHTML = "You have " + (30-(stepper+1)).toString() + " clicks left."; // show how many clicks are left
+        var begin = Date.now();
         var tile_number = ((row*11)+col);
         val = Math.round(kernel_file[kernel_number[CT]][tile_number]["y"]*maxScale);
         // show current maximal reward on html page:
@@ -79,7 +83,7 @@ const main_exp = function(config) {
         if(payoff_condition[CT] == "Accumulation"){
         document.getElementById("combRew").innerHTML = "Current combined reward: " + final_value.toString();
         }
-        
+
         coordinates.push([row,col]);
 
         //console.log("Your current value is: ",final_value);
@@ -137,6 +141,8 @@ const main_exp = function(config) {
         }
         stepper = stepper+1;
 
+        //begin = Date.now();
+
         // save data in trial_data
         let trial_data = {
           trial_name: config.name,
@@ -149,6 +155,7 @@ const main_exp = function(config) {
           x_coordinate: row,
           y_coordinate: col,
           goal: payoff_condition[CT],
+          timePerClick: Date.now()-begin,
         }
 
         // push the data to the csv
@@ -164,7 +171,6 @@ const main_exp = function(config) {
       });
 
       document.body.appendChild(grid);
-      current_exp_number += 1;
     }
   };
   // We have to return the view, so that it can be used in 05_views.js
@@ -214,6 +220,7 @@ const test_exp = function(config) {
         //console.log("You clicked on the value:",val);
         //console.log("You clicked on row:",row);
         //console.log("You clicked on col:",col);
+
         // stuff to analyse:
         final_value = final_value + val;
         coordinates.push([row,col]);
@@ -282,7 +289,6 @@ const test_exp = function(config) {
       });
 
       document.body.appendChild(grid);
-      current_exp_number += 1;
     }
   };
   // We have to return the view, so that it can be used in 05_views.js
