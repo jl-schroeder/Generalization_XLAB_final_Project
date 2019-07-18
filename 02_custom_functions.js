@@ -39,7 +39,6 @@ const width_grid = 11;
 const length_grid = 11;
 
 // 2-dim array to decide how far the clicks are away from each other
-var coordinates = [];
 var row_calc = 0;
 var col_calc = 0;
 

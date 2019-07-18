@@ -54,6 +54,7 @@ const main_exp = function(config) {
 
 
 
+
       // This function will handle  the response
       var grid = clickableGrid(length_grid,width_grid,function(el,row,col,i,val){
         document.getElementById("divMsg").innerHTML = "You have " + (30-(stepper+1)).toString() + " clicks left."; // show how many clicks are left
@@ -84,11 +85,7 @@ const main_exp = function(config) {
         document.getElementById("combRew").innerHTML = "Current combined reward: " + final_value.toString();
         }
 
-        coordinates.push([row,col]);
-
         //console.log("Your current value is: ",final_value);
-        //console.log(coordinates);
-
 
         //row_calc = row;
         //col_calc = col;
@@ -155,7 +152,6 @@ const main_exp = function(config) {
           x_coordinate: row,
           y_coordinate: col,
           goal: payoff_condition[CT],
-          timePerClick: Date.now()-begin,
         }
 
         // push the data to the csv
@@ -167,7 +163,6 @@ const main_exp = function(config) {
           stepper = 0;
           final_value = 0;
         }
-
       });
 
       document.body.appendChild(grid);
@@ -223,10 +218,8 @@ const test_exp = function(config) {
 
         // stuff to analyse:
         final_value = final_value + val;
-        coordinates.push([row,col]);
 
         //console.log("Your current value is: ",final_value);
-        //console.log(coordinates);
 
         //row_calc = row;
         //col_calc = col;
