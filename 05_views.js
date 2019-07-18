@@ -32,10 +32,11 @@ const intro = babeViews.view_generator("intro",{
             On each grid, you will have <strong>30 clicks</strong>, with the number of remaining clicks displayed above the grid. <br />
             When the current number of clicks are over, the next trial begins with an unexplored grid.
             <br />
-            Your task is to gain as many points as possible through all eight different grids.
+            <br />
+            Each trial you will either have to Maximization or Accumulation (described on the next page).
             <br />
             <br />
-            Each grid starts with a single tile revealed.
+            Each grid starts completely unrevealed and is different from the other grids.<br />
             Using your mouse, click on unexplored tiles to reveal a number corresponding to the number of points you gain.
             Note that the revealed tiles are colour-coded to assist you in this task.
             The darker the colour, the higher the reward.
@@ -49,18 +50,21 @@ const intro = babeViews.view_generator("intro",{
 const instructions = babeViews.view_generator("instructions",{
     trials: 1,
     name: 'instrucions',
-    title: 'Instructions',
+    title: 'Instructions - Reminder',
     text:  `Summarized Instructions:<br />
             <br />
             <strong>1. </strong>     On this grid with 11x11 tiles, points that you gain are revealed upon mouse-click. The tiles are colored corresponding to the gained points.<br />
             <strong>2. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
-            <strong>3. </strong>     On this page, you can also see how many clicks are left in the current trial.<br />
+            <strong>3. </strong>     On this page, you can also see how many clicks are left in the current trial, which task you have to do and a short reminder-description of the task.<br />
             <strong>4. </strong>     There are 8 different grids, each with 30 clicks.<br />
             <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
             <br />
-            <br />`,
+            On the following page you will have the chance to try out 5 clicks in a Test-grid.
+            <br />
+            <br />
+            If you fell ready, press the "GO TO TEST TRIAL" button below!`,
     buttonText: 'go to test-trial'
-});                                                     
+});
 
 
 // In the post test questionnaire you can ask your participants addtional questions
@@ -139,10 +143,34 @@ const understanding_check = babeViews.view_generator("instructions",{
   trials: 1,
   name: 'understanding_check',
   title: 'Understanding',
-  text: `If you understood everything press the button below:
+  text: `If you understood everything press the button below to start the actual experiment:
   <br />`,
   buttonText: 'start the experiment'
 });
+
+const goal_site = babeViews.view_generator("instructions",{
+  trials: 1,
+  name: 'goal_site',
+  title: 'Goals:',
+  text: `
+  <strong>Accumulation:</strong>
+  <br />
+  Your goal is to get the largest added up reward, by combining the values of all tiles you clicked on.<br />
+  There will be a counter that shows you your current combined value.
+  <br />
+  <br />
+  <br />
+  <strong>Maximization:</strong>
+  <br />
+  You will have to find the tile with the maximum value.<br />
+  Do this by clicking on the grid to reveal the underlying values.
+  <br />
+  <br />
+  <br />
+  Reminder: The values are normal distributed.`,
+  buttonText: 'Continue'
+});
+
 
 const grid_search_test = test_exp({
       trials: 1,

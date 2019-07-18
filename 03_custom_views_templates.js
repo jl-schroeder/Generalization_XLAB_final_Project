@@ -37,7 +37,7 @@ const main_exp = function(config) {
       if(payoff_condition[CT] == "Maximization"){
         intro_helper = "Your goal is to find the tile with the maximal value";
       } else if(payoff_condition[CT] == "Accumulation"){
-        intro_helper = "Your goal is to get the maximal combined value of all tiles combined you click on";
+        intro_helper = "Your goal is to get the highest combined value of all tiles you click on";
       }
       var maxREWARD = 0;
       var maxScale = getRandomArbitrary(65,85);
