@@ -7,6 +7,7 @@
 //const coin = _.sample(["head", "tail"]); // You can determine global (random) parameters here
 // Declare your variables here
 
+// for futher modification of the experiment
 //const numb_of_trials = [40,20,40,20,40,20,40,20];
 //const enviroment = _.sample(["rough", "smooth"]);
 var payoff_condition = _.shuffle(["Maximization", "Maximization", "Maximization", "Maximization", "Accumulation", "Accumulation", "Accumulation", "Accumulation"]);

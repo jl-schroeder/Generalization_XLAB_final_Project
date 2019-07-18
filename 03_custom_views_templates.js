@@ -87,9 +87,6 @@ const main_exp = function(config) {
 
         //console.log("Your current value is: ",final_value);
 
-        //row_calc = row;
-        //col_calc = col;
-
         // Decide which color the element should get
         if(val < 12){
           el.className='clicked_1';
@@ -220,9 +217,6 @@ const test_exp = function(config) {
         final_value = final_value + val;
 
         //console.log("Your current value is: ",final_value);
-
-        //row_calc = row;
-        //col_calc = col;
 
         // Decide which color the element should get
         if(val < 12){
