@@ -144,9 +144,11 @@ const main_exp = function(config) {
         // push the data to the csv
         babe.trial_data.push(trial_data);
 
-        if(stepper ==  30){
-          babe.findNextView();
-          document.body.removeChild(grid);
+        if(stepper >=  30){
+          setTimeout(function () {
+            babe.findNextView();
+            document.body.removeChild(grid);
+          }, 90);
           stepper = 0;
           final_value = 0;
         }
@@ -245,9 +247,11 @@ const test_exp = function(config) {
         }
         stepper = stepper+1;
 
-        if(stepper == 5){
-          babe.findNextView();
-          document.body.removeChild(grid);
+        if(stepper >= 5){
+          setTimeout(function () {
+            babe.findNextView();
+            document.body.removeChild(grid);
+          }, 90);
           stepper = 0;
           final_value = 0;
         }
