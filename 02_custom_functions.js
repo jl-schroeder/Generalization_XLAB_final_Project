@@ -26,14 +26,14 @@ tile_select = tile_select.toString();
 //var begin = Date.now();
 
 // get current date and time
-var today = new Date();
+/*var today = new Date();
 var date = today.getFullYear().toString() + (today.getMonth()+1).toString() + today.getDate().toString();
 var time = today.getHours().toString() + today.getMinutes().toString() + today.getSeconds().toString();
-var dateTime = date.toString() + time.toString();
+var dateTime = date.toString() + time.toString();*/
 
 // get individual ID for each participant
-var participantID = dateTime.toString() + + getRandomInt(999).toString(); //date+time+randomNumber;
-participantID = Number(participantID);
+var participantID = getRandomInt(999999) //+ dateTime.toString(); //date+time+randomNumber;
+//participantID = Number(participantID);
 
 // constants to decide how wide and long the grid should be
 const width_grid = 11;

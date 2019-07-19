@@ -33,12 +33,11 @@ const intro = babeViews.view_generator("intro",{
             When the current number of clicks are over, the next trial begins with an unexplored grid.
             <br />
             <br />
-            Each trial you will either have to Maximization or Accumulation (described on the next page).
+            During each trial you will either have to Maximization or Accumulation tanks (further described on the next page).
             <br />
             <br />
-            Each grid starts completely unrevealed and is different from the other grids.<br />
             Using your mouse, click on unexplored tiles to reveal a number corresponding to the number of points you gain.
-            Note that the revealed tiles are colour-coded to assist you in this task.
+            Note that the revealed tiles are colour-coded to assist you in this task. <br />
             The darker the colour, the higher the reward.
             Points that you may gain are clustered on the grid.
             This means, areas with high value points appear close to each other and areas of low-value points appear close to each other.
@@ -54,15 +53,18 @@ const instructions = babeViews.view_generator("instructions",{
     text:  `Summarized Instructions:<br />
             <br />
             <strong>1. </strong>     On this grid with 11x11 tiles, points that you gain are revealed upon mouse-click. The tiles are colored corresponding to the gained points.<br />
-            <strong>2. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
-            <strong>3. </strong>     On this page, you can also see how many clicks are left in the current trial, which task you have to do and a short reminder-description of the task.<br />
-            <strong>4. </strong>     There are 8 different grids, each with 30 clicks.<br />
+            <strong>2. </strong>     There are 8 different grids, each with 30 clicks.<br />
+            <strong>3. </strong>     Points are clustered and depend on the location of the tile. Neighboring tiles tend to have similar point values.<br />
+            <strong>4. </strong>     On this page, you can also see how many clicks are left in the current trial, which task you have to do and a short reminder-description of the task.<br />
             <strong>5. </strong>     Your reward will be based on the total points you earn as you reveal tiles per mouse click.<br />
             <br />
             On the following page you will have the chance to try out 5 clicks in a Test-grid.
             <br />
             <br />
-            If you fell ready, press the "GO TO TEST TRIAL" button below!`,
+            In order to familiarise with the experiment, please proceed to the next step.
+            On the following page you will have the chance to try out 5 clicks in a Test-grid.
+            Your data will not be recorded in this trial. <br />
+            If you are ready, please click the <strong>“Go to Test Trial button”</strong>.`,
     buttonText: 'go to test-trial'
 });
 
@@ -72,7 +74,7 @@ const post_test = babeViews.view_generator("post_test",{
     trials: 1,
     name: 'post_test',
     title: 'Additional information',
-    text: 'Answering the following questions is optional, but your answers will help us analyze our results.'
+    text: 'Answering the following questions is optional, but your answers will help us analyze our results. <br /> Do you have any comments?'
 
     // You can change much of what appears here, e.g., to present it in a different language, as follows:
     // buttonText: 'Weiter',
@@ -94,7 +96,7 @@ const post_test = babeViews.view_generator("post_test",{
 const thanks = babeViews.view_generator("thanks", {
     trials: 1,
     name: 'thanks',
-    title: 'Thank you for taking part in this experiment!',
+    title: 'Thank you for taking part in this experiment! We hope you enjoyed it.',
     prolificConfirmText: 'Press the button'
 });
 
@@ -143,7 +145,7 @@ const understanding_check = babeViews.view_generator("instructions",{
   trials: 1,
   name: 'understanding_check',
   title: 'Understanding',
-  text: `If you understood everything press the button below to start the actual experiment:
+  text: `Great! You have a hang of what needs to be done! Please ensure pop-ups are allowed, for a smooth experience and click the Start button to begin the experiment.
   <br />`,
   buttonText: 'start the experiment'
 });
@@ -155,21 +157,41 @@ const goal_site = babeViews.view_generator("instructions",{
   text: `
   <strong>Accumulation:</strong>
   <br />
-  Your goal is to get the largest added up reward, by combining the values of all tiles you clicked on.<br />
+  Your goal is to get the largest added up reward, by combining the values of all tiles you click on.<br />
   There will be a counter that shows you your current combined value.
   <br />
   <br />
   <br />
   <strong>Maximization:</strong>
+  Your goal is to find the tile with the maximum value.<br />
+  Do this by clicking on the grid to reveal the underlying values. <br />
+  Maximum points gained are shown on the left in real-time.<br />
   <br />
-  You will have to find the tile with the maximum value.<br />
-  Do this by clicking on the grid to reveal the underlying values.
   <br />
   <br />
-  <br />
-  Reminder: The values are normal distributed.`,
+  <strong>Note:</strong> The values are normal distributed.`,
   buttonText: 'Continue'
 });
+
+const landing_page = babeViews.view_generator("intro",{
+  trials: 1,
+  name: 'landing_page',
+  title: 'Welcome!',
+  text: `
+  This study is part of a project conducted by Cognitive Science students at the University of Osnabrueck, investigating how people search in an unknown environment. <br />
+  As a participant, you shall be asked to perform a simple computer task in which you have to explore areas on a grid and uncover rewards.<br />
+  <br />
+  In order to proceed with the experiment, please allow Pop-ups on your web browser.
+  <br />
+  The information requested in the study will be kept confidential, archived and scientifically processed in accordance with the Data Privacy Act. <br />
+  Personal data will not be passed on to any third party. <br />
+  The data will be used solely for research purposes and solely within University of Osnabrueck. <br />
+  Experimental data will be handled with utmost discretion.
+
+  `,
+  buttonText: 'Continue'
+});
+
 
 
 const grid_search_test = test_exp({
