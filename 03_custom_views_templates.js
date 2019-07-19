@@ -71,12 +71,6 @@ const main_exp = function(config) {
 
         el.innerHTML = val; // assign value to tile
 
-        // console output for further analisation
-        //console.log("You clicked on element:",el);
-        //console.log("You clicked on the value:",val);
-        //console.log("You clicked on row:",row);
-        //console.log("You clicked on col:",col);
-
         // combined value of the values of each click
         final_value = final_value + val;
 
@@ -84,8 +78,6 @@ const main_exp = function(config) {
         if(payoff_condition[CT] == "Accumulation"){
         document.getElementById("combRew").innerHTML = "Current combined reward: " + final_value.toString();
         }
-
-        //console.log("Your current value is: ",final_value);
 
         // Decide which color the element should get
         if(val < 12){
@@ -135,8 +127,6 @@ const main_exp = function(config) {
         }
         stepper = stepper+1;
 
-        //begin = Date.now();
-
         // save data in trial_data
         let trial_data = {
           trial_name: config.name,
@@ -154,7 +144,7 @@ const main_exp = function(config) {
         // push the data to the csv
         babe.trial_data.push(trial_data);
 
-        if(stepper ==  30 /*numb_of_trials[CT]*/){
+        if(stepper ==  30){
           babe.findNextView();
           document.body.removeChild(grid);
           stepper = 0;
@@ -206,17 +196,6 @@ const test_exp = function(config) {
         var tile_number = ((row*11)+col);
         val = Math.round(kernel_file["0"][tile_number]["y"]*100);
         el.innerHTML = val;
-
-        // console output for further analisation
-        //console.log("You clicked on element:",el);
-        //console.log("You clicked on the value:",val);
-        //console.log("You clicked on row:",row);
-        //console.log("You clicked on col:",col);
-
-        // stuff to analyse:
-        final_value = final_value + val;
-
-        //console.log("Your current value is: ",final_value);
 
         // Decide which color the element should get
         if(val < 12){
@@ -272,7 +251,6 @@ const test_exp = function(config) {
           stepper = 0;
           final_value = 0;
         }
-
       });
 
       document.body.appendChild(grid);
