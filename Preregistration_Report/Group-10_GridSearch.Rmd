@@ -83,9 +83,14 @@ In order to further compare within the two payoff conditions, we run the faintr 
 Using the results obtained via our statistical analysis of the dummy data, we could successfully prove that the participants search more globally when trying to maximize their rewards than when they are trying to increase the already accumulated rewards.
 
 
+# *Links*
+
 +++++++
+
 GitHub-repository: https://github.com/jl-schroeder/Generalization_XLAB_final_Project
-                    
+
+Link to the experiment: https://decision-space-xplab.netlify.com/
+
 +++++++
 
 ```{r}
