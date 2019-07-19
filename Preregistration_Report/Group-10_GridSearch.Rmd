@@ -1,0 +1,233 @@
+---
+title: "Experimental Psychology Lab Group 10 GridSearch Final Project Preregistration Report"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+# **Background**
+
+Human beings learn and reinforce behaviour with actions that lead to rewarding outcomes. Many aspects of human behaviour can thus be categorised as search problems in this process. Right from foraging for food or resources for one’s survival to searching through a hypothesis space and even in interpersonal relationships. The horizons of possible actions and their consecutive rewards is what has been shaping the learning behaviour in humans, where we search through various permutations and combinations of probable actions to generate favourable results and this further shapes our experience through learning.  However, in this process, it is vital that we exercise caution and full use of our intellect by learning to balance the dual goals of exploring the unknown options while also employing them in a way that generates favourable outcomes and immediate returns to further shape our learnt behaviour for life.
+
+This further takes us to the exploration-exploitation dilemma using the multi-armed bandit problems. To understand this better, imagine yourself in front of a row of slot machines, where one plays to maximise their rewards by independently learning the reward distributions of each option. The way to maximise this is to understand how to effectively learn which arms of the machine are better to play (i.e., exploration) and at the same time knowing which high-value arms would maximise one’s reward (i.e., exploitation). While this is true in a gambler’s scenario in front of the slot machine, it is not sufficient in real-life scenarios to just know when to explore being under the constraints and limitations of time and/or resources; it is imperative to know where one should, thus, explore.
+
+
+# **Introduction**
+
+Our experiment is a replication study,  based on the experiments by Wu et. al. (2017) on the way Generalization guides human exploration in vast decision-spaces. In the paper, the researchers introduce the spatially correlated multi-armed bandit as a paradigm to study how people use generalisation to guide their search in larger problem spaces than the traditionally used paradigm. According to the original paper, it was hypothesized that if function learning guides search behaviour, participants would perform better and learn faster in smooth environments, in which stronger spatial correlations reveal more information about nearby tiles.
+
+We traverse on the same path of including the exploration-exploitation dilemma by increasing the reward expectations during uncertainty for both the payoff conditions of accumulation of the total number of points as well as the maximisation of the reward by trying to find the highest number of the tile. However, deviating from the original experiment, we have changed the design from 2x2 to a 2x1 design since we are comparing within the subjects and not among the subject groups across difference search horizons of short (20 clicks) or long (40 clicks) per trial and across two different environments of Smooth or Rough (distribution of rewards). Our replicated experiment aims to study the individual differences between/within subjects on how they have performed on the experiment to search for rewards spread across the grid. By studying their click patterns, we aim to analyse the interpersonal differences in the way participants search for rewards and study how the click distance varies in accumulation and maximisation pay off condition trials.
+
+
+# **Research Question**
+
+In this experiment, we aim to study how humans use generalisation and  spatial correlation to guide when and where to explore. 
+
+As the experiment is designed to yield similar rewards in a clustered environment spread across the grid, we put forth the research question that humans use this criterion and assume that similar states yield similar outcomes across the two payoff conditions of accumulation of points as well as finding out the maximum reward on the grid. 
+
+We study this by analysing:
+The mean distance of clicks, which we assume is higher in the Maximization condition than in the Accumulation condition.
+
+
+# **Methodology**
+
+## *Sample Population*
+
+This is an open-platform experiment and the participants are recruited online within the University of Osnabrueck, as other students enrolled in the course as well as from the mailing list of our study program at the Institute of Cognitive Science. There are no special restrictions concerning the participants of the experiment. Each participant is presented with instructions, is clarified about the data privacy and has to provide consent to participation prior to the beginning of the experiment.
+
+
+## *Design*
+
+The experiment is a 2x1 within subject design comparing two payoff conditions: Accumulation and Maximization.
+As the dependent variable we measure the mean Manhattan distance/squared Manhattan distance of the clicks and the task (Accumulation vs. Maximization) and number of clicks as independent variables. The distance is measured on a continuous scale, while task and number of clicks are measured as discrete variables.
+ 
+## *Materials*
+
+Participants are presented with an 11x11 grid world, with 121 options where they can click on the tiles to reveal the corresponding reward. The rewards are spatially correlated, so that the higher and lower rewards are clustered. As an additional aid to guide the search the grid is covered with a heat map with darker colours representing higher rewards, which is revealed upon clicking the tiles. 
+The spatial correlation is designed using the kernels from the original paper.
+For each grid the maximal reward is randomly drawn in the range from 65 to 85, so that it cannot be easily guessed.
+
+## *Procedure*
+    
+This is a computer-based experiment. Each participant has to perform a simple computer task in which they explore areas on a grid and uncover rewards. These rewards are accumulated points per trial as well as the maximum point (found during each corresponding trial) that the participant unravels with each click, of the 30 possible clicks during each of the eight trials.
+
+Participants are first welcomed and given general instructions about the experiment. The participant is then asked to perform a test trial of five clicks in order to familiarise with the experiment. Once the participant starts the experiment, they are presented with either an accumulation or a maximisation trial at random, which are equally spaced out randomly ordered in the eight designed trials, such that there are four trials of each payoff condition. Each grid/ trial starts with a single tile revealed. Using the mouse, participants click on unexplored tiles to reveal a number corresponding to the number of points they gain.
+
+During the accumulation condition, the participant’s goal is to gain as many points as possible by clicking on tiles in the grid, balancing exploration/exploitation. They then unveil points that are associated to the location on the grid on each tile. In this interactive trial, the total accumulated points are shown on the left of the screen, to inform the participant of the same. When the participant exhausts the given 30 clicks per trial, they are presented with a pop-up screen that informs them of the end of the trial and the experiment proceeds to the next trial from the given 8 trials. 
+
+During the maximisation condition, the participant’s goal is to gain the highest possible point, with a belief that exploration goal is directed towards the global maximum  with the 30 permissible clicks during the very trial. With each click they unveil a tile from the 121 tiles on the 11x11 grid and their maximum point achieved is displayed on the left of the screen. This is also an interactive condition. As the participant unveils higher points, their maximum point achieved during the unveiling of tiles is displayed in real-time. When the participant exhausts the given 30 clicks per trial, they are presented with a pop-up screen that informs them of the end of the trial and the experiment proceeds to the next trial from the given 8 trials.
+
+Upon conclusion of all of eight trials with appearances of the two payoff conditions four times each, the experiment ends with a post-test survey where participants are asked about their search strategy and can comment on the experiment. 
+The data is then recorded on the _babe server and the participant data is saved on a CSV file, which is retrieved for statistical analysis by the experimenters.
+
+# **Analysis**
+
+The analysis of the participant data commences by defining outliers.
+
+## *Exclusion Criteria*:
+The exclusion criteria is defined based on the time elapsed as well as the mean distance between the clicks made by the participants. For a fair critical trial, we have set the allowance of 3 times the standard deviation of the time spent for the experiment (3xSD(Time spent)) as well as 3 times the standard deviation of the distance between subsequent clicks (3xSD(distance)).
+Participants who are too quick during trials are excluded from the analysis of the experiment data. The total time elapsed is considered, and subsequent exclusion from the entire data set is taken into account.
+Mean distance between tiles, from the click, gives us the way the participant has performed grid search. If participants have very high deviation from the mean distance, they are excluded from the datapool. This means that they have not taken the experiment seriously and have randomly clicked on tiles across the grid, not adhering to the instructions. 
+Similarly, if the participants have very low or near zero mean distance, they are excluded from the analysis of the experiment data as well. A very low or near zero mean distance suggests that the participant has clicked on the same tile and/ or only adjacent tiles repeatedly during the course of the experiment, thereby defying the instructions.
+
+## *Statistical Analysis*:
+We begin the statistical analysis of the data by importing it from the babe server and computing the Manhattan distance - or the distance between two clicks. Since the horizon of each trial of our experiment is changed to a fixed one with 30 permissible clicks, each click by the participant is considered as a new click. 
+
+The exclusion criteria is then applied to filter outliers that do not conform to the 3*SD(time) and the deviation from the mean of the standard values (SD+mean or Mean-SD) rule. Using the dummy data generated by the experimenters, for the purpose of this report, out of the total number of data sets, we exclude data from the participants who do not fall in accordance with our analysis criteria. We then look at the distance with respect to the payoff condition of Accumulation vs Maximisation and the number of clicks by the participants. We find the mean distance between clicks in the Accumulation and Maximization conditions.
+
+We use this data to compute with the BRMS tool in R to fit Bayesian generalized (non-)linear multivariate multilevel models using Stan. In general, every parameter is summarized using the mean (‘Estimate’) and the standard deviation (‘Est.Error’) of the posterior distribution as well as two-sided 95% credible intervals (‘l-95% CI’ and ‘u-95% CI’) based on quantiles. Using the dummy data generated by the experimenters for the purpose of this report, we see that the coefficient of Maximization is positive with a completely positive 95%-CI. This indicates that the Maximization payoff condition has a higher mean distance between clicks, which also means that the participants search globally across the grid to attain maximum rewards and not cluster their clicks along a particular area during the search.
+In order to further compare within the two payoff conditions, we run the faintr package. Building on our findings from the brms package that the Maximization payoff condition surely has a higher mean distance thereby confirming that participants search globally, we aim to find by how much does this affect the way participants search across the grid. Using the faintr package, we find the outcome of comparing the two groups gives us a mean difference between the two goals or payoff conditions. In order to confirm the effects, the P value (to check whether the higher condition of maximization is greater than the lower condition of accumulation) is positive. Findings suggest a positive P value greater than zero. This double testing of our research question further works to prove the same.
+        
+## **Interpretation**
+Using the results obtained via our statistical analysis of the dummy data, we could successfully prove that the participants search more globally when trying to maximize their rewards than when they are trying to increase the already accumulated rewards.
+
+
++++++++
+GitHub-repository: https://github.com/jl-schroeder/Generalization_XLAB_final_Project
+                    
++++++++
+
+```{r}
+
+# --- importing everthing needed ---
+
+library(tidyverse)
+
+library(rstan)
+# set cores to use to the total number of cores (minimally 4)
+options(mc.cores = max(parallel::detectCores(), 4))
+# save a compiled version of the Stan model file
+rstan_options(auto_write = TRUE)
+
+library(brms)
+
+#install faintr with
+devtools::install_github('michael-franke/bayes_mixed_regression_tutorial/faintr', build_vignettes = TRUE)
+library(faintr)
+
+#fixig the seed
+set.seed(141)
+```
+
+
+
+```{r}
+# --- helper functions ---
+
+#computes the manhattan block distance between to clicks
+#due to the fixed horizon every 30 clicks is a new first click, without a distance
+distManhattan <- function(x,y){
+  dist_Vector = double()
+  dist_X  = c(0)
+  dist_Y  = c(0)
+  x_prev = 0
+  y_prev = 0
+  t = 0
+  
+  
+  for (i in x){
+    if (isTRUE(t >= 30)){
+      t = 0
+      dist_X <- c(dist_X,0)
+    }
+    if (isTRUE(t >= 1)){
+    dist_X <- c(dist_X,abs(x_prev - i))
+    #print(dist_X)
+    }
+    x_prev = i
+    t = t + 1
+    
+  }
+  
+  t = 0
+  for (i in y){
+     if (isTRUE(t >= 30)){
+      t = 0
+      dist_Y <- c(dist_Y,0)
+    }
+    if (isTRUE(t >=1)){
+    dist_Y <- c(dist_Y,abs(y_prev - i))
+    #print(dist_Y)
+    }
+    y_prev = i
+    t = t + 1
+   
+  }
+  
+  dist_Vector = dist_X + dist_Y
+  
+  
+  return(dist_Vector)
+}
+```
+
+
+
+```{r}
+# --- loading data ---
+
+#creating a tibble with the data
+data <- read_csv('results_79_Grid_search_Group_10.csv')
+
+# fixing the data type
+data_mutated <- mutate(data, goal = factor(goal))
+glimpse(data)
+```
+
+```{r}
+# --- adding distance to the tibble --- 
+
+# distance
+distance <- distManhattan(data_mutated$x_coordinate,data_mutated$y_coordinate)
+
+# squared distance
+distance2 <- distance^2
+data_dist <- add_column(data_mutated,distance) %>% add_column(distance2)
+data_dist
+```
+
+```{r}
+# --- clearing the data ---
+
+#filter by time
+data_filtered<- filter(data_dist,timeSpent < 3*sd(timeSpent)+mean(timeSpent))
+
+#filter to high and to low mean distance
+dataGrouped_goal <- group_by(data_filtered,participant_ID) %>% summarise(dist_mean = mean(distance))
+dataGrouped_goal_filt <- filter(dataGrouped_goal,dist_mean <= sd(dist_mean)+median(dist_mean),dist_mean >=mean(dist_mean)-sd(dist_mean))
+dataGrouped_goal_filt <- c(dataGrouped_goal_filt$participant_ID)
+data_filtered <- subset(data_filtered,participant_ID %in%  dataGrouped_goal_filt)
+data_filtered
+
+```
+
+```{r}
+# --- looking a the distances ---
+
+# distances with respect to the goal condition
+dataGrouped_goal <- group_by(data_filtered,goal) %>% summarise(dist_mean <- mean(distance))
+dataGrouped_goal
+# squared distances with respect to the goal condition
+dataGrouped_goal2 <- group_by(data_filtered,goal) %>% summarise(dist_mean <- mean(distance2))
+dataGrouped_goal2
+# distances with respect to the number of clicks
+dataGrouped_clicks <- group_by(data_filtered,number_of_clicks) %>% summarise(dist_mean <- mean(distance))
+dataGrouped_clicks
+# squared distances with respect to the number of clicks
+dataGrouped_clicks2 <- group_by(data_filtered,number_of_clicks)%>% summarise(dist_mean <- mean(distance2))
+dataGrouped_clicks2
+# squared distances with respect to the number of clicks and the goal condition combined
+dataGrouped_combined <- group_by(data_filtered,goal,number_of_clicks) %>% summarise(dist_mean <- mean(distance2))
+dataGrouped_combined
+```
+
+```{r}
+data_modeled <- brm(distance ~ goal,data_filtered)
+data_modeled
+```
+
+```{r}
+faintr_1 <- faintr::compare_groups(data_modeled,higher=list(goal="Maximization"),lower=list(goal="Accumulation"))
+faintr_1
+```

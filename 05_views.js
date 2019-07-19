@@ -33,7 +33,7 @@ const intro = babeViews.view_generator("intro",{
             When the current number of clicks are over, the next trial begins with an unexplored grid.
             <br />
             <br />
-            During each trial you will either have to Maximization or Accumulation tanks (further described on the next page).
+            During each trial you will either have Maximization or Accumulation tasks (further described on the next page).
             <br />
             <br />
             Using your mouse, click on unexplored tiles to reveal a number corresponding to the number of points you gain.
