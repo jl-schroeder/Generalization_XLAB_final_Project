@@ -1656,8 +1656,9 @@ $(document).ready(function () {
 </div>
 <div id="introduction" class="section level1">
 <h1><strong>Introduction</strong></h1>
-<p>Our experiment is a replication study, based on the experiments by Wu et. al. (2017) on the way Generalization guides human exploration in vast decision-spaces. In the paper, the researchers introduce the spatially correlated multi-armed bandit as a paradigm to study how people use generalisation to guide their search in larger problem spaces than the traditionally used paradigm. According to the original paper, it was hypothesized that if function learning guides search behaviour, participants would perform better and learn faster in smooth environments, in which stronger spatial correlations reveal more information about nearby tiles.</p>
-<p>We traverse on the same path of including the exploration-exploitation dilemma by increasing the reward expectations during uncertainty for both the payoff conditions of accumulation of the total number of points as well as the maximisation of the reward by trying to find the highest number of the tile. However, deviating from the original experiment, we have changed the design from 2x2 to a 2x1 design since we are comparing within the subjects and not among the subject groups across difference search horizons of short (20 clicks) or long (40 clicks) per trial and across two different environments of Smooth or Rough (distribution of rewards). Our replicated experiment aims to study the individual differences between/within subjects on how they have performed on the experiment to search for rewards spread across the grid. By studying their click patterns, we aim to analyse the interpersonal differences in the way participants search for rewards and study how the click distance varies in accumulation and maximisation pay off condition trials.</p>
+<p>Our experiment is a replication study, based on the experiments by Wu et. al. (2017) on the way Generalization guides human exploration in vast decision-spaces. In the paper, the researchers introduce the spatially correlated multi-armed bandit as a paradigm to study how people use generalisation to guide their search in larger problem spaces than the traditionally used paradigm. According to the original paper, it was hypothesized that if function learning guides search behaviour, participants would perform better and learn faster in smooth environments, in which stronger spatial correlations reveal more information about nearby tiles.</p>
+<p>We traverse on the same path of including the exploration-exploitation dilemma by increasing the reward expectations during uncertainty for both the payoff conditions of accumulation of the total number of points as well as the maximisation of the reward by trying to find the highest number of the tile. However, deviating from the original experiment, we have changed the design from 2x2 between subject design across different search horizons of short (20 clicks) or long (40 clicks) per trial and across two different environments of Smooth or Rough (distribution of rewards). We have a within subjet design and compare the payoff condition (Maximization vs. Accumulation) of subjects with a fixed search horizon (30 clicks).<br />
+Our replicated experiment aims to study the differences of the subjects on how they have performed on the experiment to search for rewards spread across the grid. By studying their click patterns, we aim to analyse the differences in the way participants search for rewards and study how the click distance varies in accumulation and maximisation pay off condition trials.</p>
 </div>
 <div id="research-question" class="section level1">
 <h1><strong>Research Question</strong></h1>
@@ -1673,7 +1674,7 @@ $(document).ready(function () {
 </div>
 <div id="design" class="section level2">
 <h2><em>Design</em></h2>
-<p>The experiment is a 2x1 within subject design comparing two payoff conditions: Accumulation and Maximization. As the dependent variable we measure the mean Manhattan distance/squared Manhattan distance of the clicks and the task (Accumulation vs. Maximization) and number of clicks as independent variables. The distance is measured on a continuous scale, while task and number of clicks are measured as discrete variables.</p>
+<p>The experiment is a within-subject design with a single independent variable: payoff condition. As the dependent variable we measure the mean Manhattan distance/squared Manhattan distance of the clicks.The distance is measured on a continuous scale, while the payoff condition is measured as binary factor.</p>
 </div>
 <div id="materials" class="section level2">
 <h2><em>Materials</em></h2>
@@ -1699,7 +1700,9 @@ $(document).ready(function () {
 <h2><em>Statistical Analysis</em>:</h2>
 <p>We begin the statistical analysis of the data by importing it from the babe server and computing the Manhattan distance - or the distance between two clicks. Since the horizon of each trial of our experiment is changed to a fixed one with 30 permissible clicks, each click by the participant is considered as a new click.</p>
 <p>The exclusion criteria is then applied to filter outliers that do not conform to the 3*SD(time) and the deviation from the mean of the standard values (SD+mean or Mean-SD) rule. Using the dummy data generated by the experimenters, for the purpose of this report, out of the total number of data sets, we exclude data from the participants who do not fall in accordance with our analysis criteria. We then look at the distance with respect to the payoff condition of Accumulation vs Maximisation and the number of clicks by the participants. We find the mean distance between clicks in the Accumulation and Maximization conditions.</p>
-<p>We use this data to compute with the BRMS tool in R to fit Bayesian generalized (non-)linear multivariate multilevel models using Stan. In general, every parameter is summarized using the mean (‘Estimate’) and the standard deviation (‘Est.Error’) of the posterior distribution as well as two-sided 95% credible intervals (‘l-95% CI’ and ‘u-95% CI’) based on quantiles. Using the dummy data generated by the experimenters for the purpose of this report, we see that the coefficient of Maximization is positive with a completely positive 95%-CI. This indicates that the Maximization payoff condition has a higher mean distance between clicks, which also means that the participants search globally across the grid to attain maximum rewards and not cluster their clicks along a particular area during the search. In order to further compare within the two payoff conditions, we run the faintr package. Building on our findings from the brms package that the Maximization payoff condition surely has a higher mean distance thereby confirming that participants search globally, we aim to find by how much does this affect the way participants search across the grid. Using the faintr package, we find the outcome of comparing the two groups gives us a mean difference between the two goals or payoff conditions. In order to confirm the effects, the P value (to check whether the higher condition of maximization is greater than the lower condition of accumulation) is positive. Findings suggest a positive P value greater than zero. This double testing of our research question further works to prove the same.</p>
+<p>We use this data to compute with the BRMS tool in R to fit Bayesian generalized (non-)linear multivariate multilevel models using Stan. In general, every parameter is summarized using the mean (‘Estimate’) and the standard deviation (‘Est.Error’) of the posterior distribution as well as two-sided 95% credible intervals (‘l-95% CI’ and ‘u-95% CI’) based on quantiles. Using the dummy data generated by the experimenters for the purpose of this report, we see that the coefficient of Maximization is positive with a completely positive 95%-CI. This indicates that the Maximization payoff condition has a higher mean distance between clicks, which also means that the participants search globally across the grid to attain maximum rewards and not cluster their clicks along a particular area during the search.</p>
+<p>Since the subjects are asked to complete eight grids in order to complete the experiment we also included a model with a by-participant random intercept and compared the models with the loo function.</p>
+<p>In order to further compare within the two payoff conditions, we run the faintr package. Building on our findings from the brms package that the Maximization payoff condition surely has a higher mean distance thereby confirming that participants search globally, we aim to find by how much does this affect the way participants search across the grid. Using the faintr package, we find the outcome of comparing the two groups gives us a mean difference between the two goals or payoff conditions. In order to confirm the effects, the P value (to check whether the higher condition of maximization is greater than the lower condition of accumulation) is positive. Findings suggest a positive P value greater than zero. This double testing of our research question further works to prove the same.</p>
 </div>
 <div id="interpretation" class="section level2">
 <h2><strong>Interpretation</strong></h2>
@@ -1715,20 +1718,12 @@ $(document).ready(function () {
 <pre class="r"><code># --- importing everthing needed ---
 
 library(tidyverse)</code></pre>
-<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;rvest&#39;:
-##   method            from
-##   read_xml.response xml2</code></pre>
-<pre><code>## -- Attaching packages ------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
 <pre><code>## v ggplot2 3.1.1       v purrr   0.3.2  
 ## v tibble  2.1.1       v dplyr   0.8.0.1
 ## v tidyr   0.8.3       v stringr 1.4.0  
 ## v readr   1.3.1       v forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts --------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts --------------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(rstan)</code></pre>
@@ -1739,11 +1734,11 @@ library(tidyverse)</code></pre>
 ## To avoid recompilation of unchanged Stan programs, we recommend calling
 ## rstan_options(auto_write = TRUE)</code></pre>
 <pre><code>## For improved execution time, we recommend calling
-## Sys.setenv(LOCAL_CPPFLAGS = &#39;-march=native&#39;)
+## Sys.setenv(LOCAL_CPPFLAGS = '-march=native')
 ## although this causes Stan to throw an error on a few processors.</code></pre>
 <pre><code>## 
-## Attaching package: &#39;rstan&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## Attaching package: 'rstan'</code></pre>
+<pre><code>## The following object is masked from 'package:tidyr':
 ## 
 ##     extract</code></pre>
 <pre class="r"><code># set cores to use to the total number of cores (minimally 4)
@@ -1753,20 +1748,17 @@ rstan_options(auto_write = TRUE)
 
 library(brms)</code></pre>
 <pre><code>## Loading required package: Rcpp</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;xts&#39;:
-##   method     from
-##   as.zoo.xts zoo</code></pre>
-<pre><code>## Loading &#39;brms&#39; package (version 2.8.0). Useful instructions
-## can be found by typing help(&#39;brms&#39;). A more detailed introduction
-## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
+<pre><code>## Loading 'brms' package (version 2.8.0). Useful instructions
+## can be found by typing help('brms'). A more detailed introduction
+## to the package is available through vignette('brms_overview').</code></pre>
 <pre><code>## 
-## Attaching package: &#39;brms&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:rstan&#39;:
+## Attaching package: 'brms'</code></pre>
+<pre><code>## The following object is masked from 'package:rstan':
 ## 
 ##     loo</code></pre>
 <pre class="r"><code>#install faintr with
-devtools::install_github(&#39;michael-franke/bayes_mixed_regression_tutorial/faintr&#39;, build_vignettes = TRUE)</code></pre>
-<pre><code>## Skipping install of &#39;faintr&#39; from a github remote, the SHA1 (a8f46ace) has not changed since last install.
+devtools::install_github('michael-franke/bayes_mixed_regression_tutorial/faintr', build_vignettes = TRUE)</code></pre>
+<pre><code>## Skipping install of 'faintr' from a github remote, the SHA1 (a8f46ace) has not changed since last install.
 ##   Use `force = TRUE` to force installation</code></pre>
 <pre class="r"><code>library(faintr)
 
@@ -1822,7 +1814,7 @@ distManhattan &lt;- function(x,y){
 <pre class="r"><code># --- loading data ---
 
 #creating a tibble with the data
-data &lt;- read_csv(&#39;results_79_Grid_search_Group_10.csv&#39;)</code></pre>
+data &lt;- read_csv('results_79_Grid_search_Group_10.csv')</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   .default = col_double(),
@@ -1946,24 +1938,90 @@ dataGrouped_combined</code></pre>
 ## 
 ## Population-Level Effects: 
 ##                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
-## Intercept            1.28      0.08     1.12     1.44       3687 1.00
-## goalMaximization     1.19      0.12     0.96     1.42       3462 1.00
+## Intercept            1.28      0.08     1.12     1.45       4349 1.00
+## goalMaximization     1.19      0.12     0.95     1.43       4237 1.00
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
-## sigma     2.78      0.04     2.70     2.86       4110 1.00
+## sigma     2.77      0.04     2.70     2.85       4794 1.00
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
 ## is a crude measure of effective sample size, and Rhat is the potential 
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code># second brm model adding random effects
+data_modeled_2 &lt;- brm(distance ~ goal + (1|participant_ID),data_filtered)</code></pre>
+<pre><code>## Compiling the C++ model</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre><code>## Warning: There were 1 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help. See
+## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
+<pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
+<pre class="r"><code>data_modeled_2</code></pre>
+<pre><code>## Warning: There were 1 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help.
+## See http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: distance ~ goal + (1 | participant_ID) 
+##    Data: data_filtered (Number of observations: 2160) 
+## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup samples = 4000
+## 
+## Group-Level Effects: 
+## ~participant_ID (Number of levels: 9) 
+##               Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## sd(Intercept)     1.18      0.44     0.67     2.32        402 1.01
+## 
+## Population-Level Effects: 
+##                  Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## Intercept            1.28      0.43     0.40     2.16        712 1.00
+## goalMaximization     1.19      0.11     0.98     1.41       2822 1.00
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+## sigma     2.62      0.04     2.55     2.70       3196 1.00
+## 
+## Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+## is a crude measure of effective sample size, and Rhat is the potential 
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>Model_compare_1 = loo(data_modeled)
+Model_compare_1</code></pre>
+<pre><code>## 
+## Computed from 4000 by 2160 log-likelihood matrix
+## 
+##          Estimate    SE
+## elpd_loo  -5272.7  80.6
+## p_loo         7.7   1.2
+## looic     10545.5 161.1
+## ------
+## Monte Carlo SE of elpd_loo is 0.0.
+## 
+## All Pareto k estimates are good (k &lt; 0.5).
+## See help('pareto-k-diagnostic') for details.</code></pre>
+<pre class="r"><code>Model_compare_2 = loo(data_modeled_2)
+Model_compare_2</code></pre>
+<pre><code>## 
+## Computed from 4000 by 2160 log-likelihood matrix
+## 
+##          Estimate    SE
+## elpd_loo  -5154.5  78.7
+## p_loo        15.3   1.7
+## looic     10309.0 157.3
+## ------
+## Monte Carlo SE of elpd_loo is 0.1.
+## 
+## All Pareto k estimates are good (k &lt; 0.5).
+## See help('pareto-k-diagnostic') for details.</code></pre>
+<pre class="r"><code>loo_compare(Model_compare_1,Model_compare_2)</code></pre>
+<pre><code>##                elpd_diff se_diff
+## data_modeled_2    0.0       0.0 
+## data_modeled   -118.3      13.3</code></pre>
 <pre class="r"><code>faintr_1 &lt;- faintr::compare_groups(data_modeled,higher=list(goal=&quot;Maximization&quot;),lower=list(goal=&quot;Accumulation&quot;))
 faintr_1</code></pre>
 <pre><code>## Outcome of comparing groups:
 ##  * higher:  goal:Maximization 
 ##  * lower:   goal:Accumulation 
-## Mean &#39;higher - lower&#39;:  1.192 
-## 95% CI: [ 0.9637 ; 1.424 ]
-## P(&#39;higher - lower&#39; &gt; 0):  1</code></pre>
+## Mean 'higher - lower':  1.193 
+## 95% CI: [ 0.9523 ; 1.423 ]
+## P('higher - lower' &gt; 0):  1</code></pre>
 </div>
 
 
